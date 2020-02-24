@@ -56,37 +56,55 @@ let createCarousel = () => {
 let carouselContainer = document.querySelector('.carousel-container');
 carouselContainer.appendChild(createCarousel());
 
+// Carousel functionality
+
 let next = document.querySelector('.carousel div:nth-child(1)');
 let prev = document.querySelector('.carousel div:nth-child(6)');
 
+// Grabbed a list of all the images
 let carouselImages = document.querySelectorAll('.carousel img');
 
-let counter = 0;
+// starting list index
+let index = 0;
 
+// number of images
 let amount = carouselImages.length;
 
+// the current image
 let current = carouselImages[0];
 
+// display the current image
 current.style.display = 'block';
 
+// function to change current image
 function navigate(direction) {
+  // hide current image
   current.style.display = 'none';
-  counter += direction;
+  //change the index
+  index += direction;
 
-  if (direction === -1 && counter < 0) {
-    counter = amount -1;
+  // make sure the index isn't negative when using prev
+  if (direction === -1 && index < 0) {
+    index = amount -1;
   }
-  if (direction === 1 && !items[counter]) {
-    counter = 0;
+  // when the index gets too high and it can't be found set it to 0
+  if (direction === 1 && !items[index]) {
+    index = 0;
   }
 
-  current = carouselImages[counter];
+  //set set the current image to the current index
+  current = carouselImages[index];
+  // display the current image
   current.style.display = 'block';
 }
 
+// event listeners
+
+// adds 1 to index to select the next image
 next.addEventListener('click', () => {
   navigate(1);
 });
+// subtracts 1 from the index to grab the previous image
 prev.addEventListener('click', () => {
   navigate(-1);
 });
