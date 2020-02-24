@@ -32,6 +32,6 @@ let createHeader = () => {
     return header;
 }
 
-let container = document.querySelector('.header-container');
+let headerContainer = document.querySelector('.header-container');
 
-container.appendChild(createHeader());
+headerContainer.appendChild(createHeader());
