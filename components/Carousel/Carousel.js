@@ -74,7 +74,7 @@ let amount = carouselImages.length;
 let current = carouselImages[0];
 
 // display the current image
-current.style.display = 'block';
+current.style.display = 'inline-block';
 
 // function to change current image
 function navigate(direction) {
@@ -95,7 +95,7 @@ function navigate(direction) {
   //set set the current image to the current index
   current = carouselImages[index];
   // display the current image
-  current.style.display = 'block';
+  current.style.display = 'inline-block';
 }
 
 // event listeners
