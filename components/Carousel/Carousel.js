@@ -26,6 +26,9 @@ let createCarousel = () => {
   let leftButton = document.createElement('div');
   leftButton.setAttribute('class', 'left-button');
   leftButton.textContent = ' < ';
+  leftButton.addEventListener('click', () => {
+    navigate(-1);
+  });
 
   let imgOne = document.createElement('img');
   imgOne.setAttribute('src', './assets/carousel/mountains.jpeg');
@@ -42,6 +45,9 @@ let createCarousel = () => {
   let rightButton = document.createElement('div');
   rightButton.setAttribute('class', 'right-button');
   rightButton.textContent = ' > ';
+  rightButton.addEventListener('click', () => {
+    navigate(1);
+  });
 
   carousel.appendChild(leftButton);
   carousel.appendChild(imgOne);
@@ -50,62 +56,29 @@ let createCarousel = () => {
   carousel.appendChild(imgFour);
   carousel.appendChild(rightButton);
 
+  let carouselImages = [imgOne, imgTwo, imgThree, imgFour];
+  let index = 0;
+  let amount = carouselImages.length;
+  let current = carouselImages[index];
+  
+  current.style.display = 'inline-block';
+
+  function navigate(direction) {
+    current.style.display = 'none';
+    index += direction;
+
+    if (direction === -1 && index < 0) {
+      index = amount -1;
+    }
+    if (direction === 1 && !carouselImages[index]) {
+      index = 0;
+    }
+
+    current = carouselImages[index];
+    current.style.display = 'inline-block';
+  }
+
   return carousel;
 }
 
-let carouselContainer = document.querySelector('.carousel-container');
-carouselContainer.appendChild(createCarousel());
-
-// Carousel functionality
-
-let next = document.querySelector('.carousel div:nth-child(1)');
-let prev = document.querySelector('.carousel div:nth-child(6)');
-
-// Grabbed a list of all the images
-let carouselImages = document.querySelectorAll('.carousel img');
-
-// starting list index
-let index = 0;
-
-// number of images
-let amount = carouselImages.length;
-
-// the current image
-let current = carouselImages[0];
-
-// display the current image
-current.style.display = 'inline-block';
-
-// function to change current image
-function navigate(direction) {
-  // hide current image
-  current.style.display = 'none';
-  //change the index
-  index += direction;
-
-  // make sure the index isn't negative when using prev
-  if (direction === -1 && index < 0) {
-    index = amount -1;
-  }
-  // when the index gets too high and it can't be found set it to 0
-  if (direction === 1 && !items[index]) {
-    index = 0;
-  }
-
-  //set set the current image to the current index
-  current = carouselImages[index];
-  // display the current image
-  current.style.display = 'inline-block';
-}
-
-// event listeners
-
-// adds 1 to index to select the next image
-next.addEventListener('click', () => {
-  navigate(1);
-});
-// subtracts 1 from the index to grab the previous image
-prev.addEventListener('click', () => {
-  navigate(-1);
-});
-
+document.querySelector('.carousel-container').appendChild(createCarousel());
