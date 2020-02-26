@@ -10,9 +10,7 @@
 
 let createTopic = (topic) => {
     let newTab = document.createElement('div');
-        
     newTab.setAttribute('class', 'tab');
-    
     newTab.textContent = topic;
 
     return newTab;

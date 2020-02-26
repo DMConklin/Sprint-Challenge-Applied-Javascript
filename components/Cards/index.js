@@ -54,11 +54,6 @@ cardsContainer = document.querySelector('.cards-container');
 
 axios.get('https://lambda-times-backend.herokuapp.com/articles').
             then(articles => {
-                // Object.keys(articles.data.articles).forEach(articleTopic => {
-                //     articles.data.articles[articleTopic].forEach(article => {
-                //         cardsContainer.appendChild(createArticle(article));
-                //     })
-                // })
                 for (const articleTopic in articles.data.articles) {
                     articles.data.articles[articleTopic].forEach(article => {
                         cardsContainer.appendChild(createArticle(article));
